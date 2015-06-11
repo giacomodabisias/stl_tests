@@ -35,8 +35,7 @@ int unordered(std::vector<T> &v){
 	return h.size();
 }
 
-template <typename T>
-void bitset(std::vector<T> &v, int max){
+void bitset(std::vector<int> &v, int max){
 	
 	boost::dynamic_bitset<> bits(max+2);
 	std::cout << "bitset size " << max << std::endl;
@@ -81,6 +80,7 @@ int main(int argc, char * argv[]){
 	std::cout << "time: " << time_ << std::endl;
 	std::cout << "removed " << size - v.size() << " elements! using " << (float)m*4/1024/1024 <<"MB of additional memory" << std::endl;
 	
+	// works only with int
 	std::cout << "using bitset" << std::endl;
 	
 	begin_time = clock();
@@ -89,7 +89,7 @@ int main(int argc, char * argv[]){
 	std::cout << std::fixed;
 	float time_2 = float( clock () - begin_time ) /  CLOCKS_PER_SEC;
 	std::cout << "time: " << time_2 << std::endl;
-	std::cout << "removed " << size - v2.size() << " elements! using " << (float)m/1024/1024 <<"MB of additional memory" << std::endl;
+	std::cout << "removed " << size - v2.size() << " elements! using " << (float)m/8/1024/1024 <<"MB of additional memory" << std::endl;
 
 	if(time_ > time_2)
 		std::cout << "bitset is faster by a factor " << time_ / time_2 << std::endl;
