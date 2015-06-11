@@ -41,7 +41,7 @@ int unordered(std::vector<T> &v){
 
 void bitset(std::vector<int> &v, int max){
 	
-	boost::dynamic_bitset<> bits(max+2);
+	boost::dynamic_bitset<> bits(max + 1);
 	std::cout << "bitset size " << max << std::endl;
 	int r = v.size() - 1;
 	int i = 0;
