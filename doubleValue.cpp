@@ -29,12 +29,10 @@ int unordered(std::vector<T> &v){
 			++i;
 		}
 		else{
-			std::swap(v[i], v[r]);
+			std::swap(v[i], v[r-1]);
 			r--;
 		}
-		
 	}
-
 	v.resize(r);
 	return h.size();
 }
@@ -51,12 +49,11 @@ void bitset(std::vector<int> &v, int max){
 			++i;
 		}
 		else{
-			std::swap(v[i], v[r]);
+			std::swap(v[i], v[r-1]);
 			r--; 
 		}
 	}
 	v.resize(r);
-
 }
 
 template <typename T>
@@ -70,6 +67,14 @@ void set(std::vector<T> &v){
 	std::copy(s.begin(), s.end(), std::back_inserter(v));
 }
 
+template <typename T>
+void sort(std::vector<T> &v){
+
+	std::sort(v.begin(), v.end()); 
+	auto new_end = std::unique(v.begin(), v.end()); 
+	v.erase(new_end, v.end()); 
+}
+
 
 int main(int argc, char * argv[]){
 
@@ -77,10 +82,15 @@ int main(int argc, char * argv[]){
 	
 	// filling the vector with random numbers
 	std::vector<int> v;
+
+	std::cout << "generating random vectors" << std::endl;
 	v.resize(size);
-	std::generate_n(v.begin(), size, gen_rand());
+	std::generate(v.begin(), v.end(), gen_rand());
 	std::vector<int> v2 = v;
 	std::vector<int> v3 = v;
+	std::vector<int> v4 = v;
+
+	std::cout << "generated random vectors" << std::endl;
 
 	// getting the size of the bitset
 	int max = *std::max_element(v.begin(), v.end());
@@ -99,7 +109,8 @@ int main(int argc, char * argv[]){
 	
 	// works only with int
 	std::cout << "using bitset" << std::endl;
-	
+
+	 begin_time = clock();
 
 	bitset(v2, max);
 
@@ -112,13 +123,21 @@ int main(int argc, char * argv[]){
 	begin_time = clock();
 
 	set(v3);
-
 	
 	std::cout << std::fixed;
 	float time_3 = float( clock () - begin_time ) /  CLOCKS_PER_SEC;
-	std::cout << "time: " << time_2 << std::endl;
+	std::cout << "time: " << time_3 << std::endl;
 	std::cout << "removed " << size - v3.size() << " elements!" << std::endl;
 
+	std::cout << "using sort" << std::endl;
 	
+	begin_time = clock();
+
+	sort(v4);
+	
+	std::cout << std::fixed;
+	float time_4 = float( clock () - begin_time ) /  CLOCKS_PER_SEC;
+	std::cout << "time: " << time_4 << std::endl;
+	std::cout << "removed " << size - v4.size() << " elements!" << std::endl;
 
 }

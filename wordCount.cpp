@@ -32,6 +32,7 @@ while(iss2){
 	if(iss2.eof())
 		break;
 	iss2 >> tmp;
+	std::reverse(tmp.begin(), tmp.end());
 	tokens2.push_back(tmp);
 }
 
